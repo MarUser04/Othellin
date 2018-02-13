@@ -1,5 +1,4 @@
 
-
 window.onload = function(){
 
 	let casillas = document.getElementsByClassName("casilla");
@@ -108,14 +107,31 @@ let conNegras = 2;
 puntajeBlancas[0].innerText = "Blancas: "+conBlancas;
 puntajeNegras[0].innerText = "Negras: "+conNegras;
 
+var ganador = document.getElementsByClassName('ganador');
+
+
 
 function movimiento(event){
 
      conBlancas = 0;
      conNegras = 0;
 
+     //console.log(event.target.id)
 
-		if(event.target.id){
+     let clickPos = false;
+     for(let i =0; i< 8; i++){
+        for(let j=0; j<8; j++){
+            if(juego[i][j].id === event.target.id){
+               if(fichas[i][j] === 3){
+                clickPos= true;
+               }
+            }
+
+        }
+     }
+
+
+		if(event.target.id && clickPos){
 			if(turno){
 	           	//console.log("blancas "+event.target.id);
 	           	ficha = document.createElement("div");
@@ -209,8 +225,13 @@ function movimiento(event){
         puntajeBlancas[0].innerText = "Blancas: "+conBlancas;
         puntajeNegras[0].innerText = "Negras: "+conNegras;
 
-        HayMovimientos(turno, fichas);
+        let mov;
+        mov = HayMovimientos(turno, fichas);
 
+        if(!mov){
+            turno = !turno;
+            HayMovimientos(turno, fichas);
+        }
 
         for(let i=0; i<8; i++){
                 for(let j=0; j<8; j++){
@@ -222,40 +243,68 @@ function movimiento(event){
                 }
         }
 
-        //juego[3][3].firstChild.nextSibling.classList.remove('ficha_blanca')
-        //juego[3][3].firstElementChild.classList.add('ficha_negra')
-        //console.log(juego[3][3].firstChild.nextSibling)
-        
 
-        //console.log(fichas)
-        //console.log(juego)
-
-
-         let posxd=0;
+         /*let posxd=0;
 
             for(let i=0; i<8; i++){
                 for(let j=0; j<8; j++){
                     if(fichas[i][j] === 3)
                         console.log(fichas[i][j] + " X: "+ j + " Y: "+i)
                 }
-               }
+            }*/
 
-        	 
         	
-        	   event.target.removeEventListener("click", movimiento)
+            let end = finJuego(fichas);
+
+            if(end || conBlancas == 0 || conNegras == 0){
+                if(conBlancas > conNegras)
+                    ganador[0].innerText = "Ganan: Blancas";
+                else
+                    ganador[0].innerText = "Ganan: Negras";
+
+                turnoJugar[0].innerText = "Juegan: -----";
+            }
+
+        	clickPos=false;
+        	event.target.removeEventListener("click", movimiento)
 		}
              
 }
 
+////////////////////////////
+function finJuego(fichas){
+
+    let end = false;
+    let cont= 0;
+    for(let i =0; i<8; i++){
+        for(let k=0; k<8; k++){
+            if(fichas[i][k] != 0 && fichas[i][k] != 3 ){
+                cont++;
+            }   
+        }
+    }
+
+    if(cont == 64)
+        end=true;
+
+    return end;   
+}
+
 ///////////////////////////////
 function HayMovimientos(turno, fichas){
+
+    let mov = false;
     for(let i =0; i<8; i++){
         for(let k=0; k<8; k++){
             if(jugable(turno, i, k, fichas)){
                 fichas[i][k] = 3;
+                mov = true;
             }
         }
     }
+
+    return mov;
+    
 }
 
 

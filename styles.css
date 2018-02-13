@@ -106,3 +106,38 @@ footer{
 	display: flex;
 	justify-content: center;
 }
+
+.ganador{
+	text-align: center;
+	margin-top: 2%;
+	font-size: 1.2em;
+}
+
+////////////////
+
+.creditos{
+
+	display: flex;
+	flex-direction: column;
+
+}
+
+.creditos>h1{
+	margin-top: 35%;
+	text-align: center;
+}
+
+.creadores{
+	margin-top: 15%;
+	text-align: center;
+}
+.creadores>p{
+	font-size: 1.4em;
+	margin: 15px;
+}
+
+p{
+	margin-top: 20%;
+	text-align: center;
+}
+
