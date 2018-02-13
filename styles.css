@@ -161,4 +161,20 @@ p{
 		margin-bottom: 5%;
 	}
 
+
+	/*--------*/
+	.titulo{
+		font-size: 2em;
+	}
+	.puntajes{
+		font-size: 1.6em;
+	}
+
+	.turno{
+		font-size: 1.5em;
+	}
+	.menuLink{
+		font-size: 1.5em;
+		margin-bottom: 3%;
+	}
 }
