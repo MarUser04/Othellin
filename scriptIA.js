@@ -111,10 +111,20 @@ var ganador = document.getElementsByClassName('ganador');
 var xIA = 0;
 var yIA = 0;
 
+/////
+
+var PaseTurnoB; 
+var PaseTurnoN;
+
+////
+
 function movimiento(event){
 
      conBlancas = 0;
      conNegras = 0;
+
+     ///////
+  
 
      //console.log(event.target.id)
 
@@ -132,6 +142,8 @@ function movimiento(event){
 
 
         if(event.target.id && clickPos){
+            PaseTurnoB = true;
+            PaseTurnoN = false;
             if(turno){
                 //console.log("blancas "+event.target.id);
                 ficha = document.createElement("div");
@@ -229,6 +241,7 @@ function movimiento(event){
         mov = HayMovimientos(turno, fichas);
 
         if(!mov){
+            PaseTurnoB =false;
             turno = !turno;
             intermedio();
         }
@@ -256,7 +269,7 @@ function movimiento(event){
             
             let end = finJuego(fichas);
 
-            if(end || conBlancas == 0 || conNegras == 0){
+            if(end || conBlancas == 0 || conNegras == 0 || (PaseTurnoB == false && PaseTurnoN == false)){
                 if(conBlancas > conNegras)
                     ganador[0].innerText = "Ganan: Blancas";
                 else if(conBlancas < conNegras)
@@ -332,6 +345,7 @@ if (fichas[xIA][yIA]===0 ||fichas[xIA][yIA]===3) {
     fichas[xIA][yIA] = 2;
     console.log(fichas[xIA][yIA])
     cambiar(turno, xIA, yIA, fichas, juego);
+     PaseTurnoN = true;
     
 }
 turno = !turno;
