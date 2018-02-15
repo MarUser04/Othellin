@@ -18,7 +18,7 @@
     <icon src="icono.jpg"/>
   
     <preference name="Fullscreen" value="false" />
-    <preference name="phonegap-version" value="cli-5.2.0" /> <!-- Phonegap Build only :v -->
+    <preference name="phonegap-version" value="cli-6.0.0" /> <!-- Phonegap Build only :v -->
 
     <plugin name="cordova-plugin-whitelist" version="*" />
     <plugin name="cordova-plugin-device" version="*" />
